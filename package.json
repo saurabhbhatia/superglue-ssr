@@ -10,7 +10,9 @@
     "esbuild": "^0.25.7"
   },
   "scripts": {
-    "build": "esbuild app/javascript/*.* --bundle --sourcemap --format=esm --outdir=app/assets/builds --public-path=/assets",
+    "build": "yarn run build:ssr && yarn run build:web",
+    "build:web": "node esbuild.config.js",
+    "build:ssr": "node ./build-ssr.mjs",
     "build:css": "sass ./app/assets/stylesheets/application.sass.scss:./app/assets/builds/application.css --no-source-map --load-path=node_modules"
   },
   "dependencies": {
@@ -18,9 +20,13 @@
     "@hotwired/turbo-rails": "^8.0.16",
     "@reduxjs/toolkit": "^2.8.2",
     "@thoughtbot/superglue": "^1.0.2",
+    "esbuild-plugin-polyfill-node": "^0.3.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-redux": "^9.2.0",
-    "sass": "^1.89.2"
+    "sass": "^1.89.2",
+    "source-map-support": "^0.5.21",
+    "text-encoding": "^0.7.0",
+    "whatwg-url": "^14.2.0"
   }
 }
